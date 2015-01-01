@@ -1,4 +1,4 @@
-name = "Search API autocomplete for a custom search box"
+name = "Search API autocomplete for an input box"
 description = "create a custom search experience"
 core = "7.x"
 version = "7.x-1.0"

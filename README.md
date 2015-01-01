@@ -1,4 +1,4 @@
-#Search API autocomplete for a custom search box
+#Search API autocomplete for an input box
 
 ##Purpose :
 IF you are using search API with Acquia solr search and need a autocomplte widget for search results.
@@ -6,10 +6,10 @@ Search API autocomplete does the job. But if you just have a input box in your t
 and need to add autocomplete feature on it then this module can be used.
 
 ##Before: 
-#<input type="text">
+<!--<input type="text">-->
 
 After:
-#<input class="auto_submit form-text form-autocomplete" type="text" id="gk_search_box" name="keys" value="" size="60" maxlength="128" autocomplete="OFF" aria-autocomplete="list" placeholder="searhbox">
+<!--<input class="auto_submit form-text form-autocomplete" type="text" id="gk_search_box" name="keys" value="" size="60" maxlength="128" autocomplete="OFF" aria-autocomplete="list" placeholder="searhbox">-->
 
 
 
