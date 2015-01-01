@@ -5,11 +5,11 @@ IF you are using search API with Acquia solr search and need a autocomplte widge
 Search API autocomplete does the job. But if you just have a input box in your tpl files and you are using it for search 
 and need to add autocomplete feature on it then this module can be used.
 
-##Before: 
-<? echo  '<input type="text">'; ?>
+Example : 
 
-After:
-<? echo '<input class="auto_submit form-text form-autocomplete" type="text" id="gk_search_box" name="keys" value="" size="60" maxlength="128" autocomplete="OFF" aria-autocomplete="list" placeholder="searhbox">'?>
+<input type="text">
+
+<input class="auto_submit form-text form-autocomplete" type="text" id="gk_search_box" name="keys" value="" size="60" maxlength="128" autocomplete="OFF" aria-autocomplete="list" placeholder="searhbox">
 
 
 
