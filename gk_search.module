@@ -1,0 +1,119 @@
+<?php
+
+/*
+function gk_search_menu() {
+  $items = array();
+  $items['examples/form-example'] = array( //this creates a URL that will call this form at "examples/form-example"
+    'title' => 'Example Form', //page title
+    'description' => 'A form to mess around with.',
+    'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
+    'page arguments' => array('gk_search_form'), //put the name of the form here
+    'access callback' => TRUE
+  );
+  
+
+  
+  
+  return $items;
+}
+*/
+
+function gk_search_form($form, &$form_state) {
+  $form['keys'] = array(
+    '#type' => 'textfield', //you can find a list of available types in the form api
+    '#id' => 'gk_search_box',
+  );
+  $autocomplete_id = 'gk_search';
+  $search = search_api_autocomplete_search_load($autocomplete_id);
+  $search->alterElement($form['keys']);
+  return $form;
+}
+
+function gk_search_form_2($form, &$form_state) {
+  $form['keys'] = array(
+    '#type' => 'textfield', //you can find a list of available types in the form api
+    '#id' => 'gk_search_box_2',
+  );
+  $autocomplete_id = 'gk_search';
+  $search = search_api_autocomplete_search_load($autocomplete_id);
+  $search->alterElement($form['keys']);
+  return $form;
+}
+
+
+	
+ 
+
+
+function gk_search_search_api_autocomplete_types() {
+  $types['example'] = array(
+    'name' => t('Example searches'),
+    'description' => t('Searches provided by the <em>Example</em> module.'),
+    'list searches' => 'gk_search_autocomplete_searches',
+    'create query' => 'gk_search_create_autocomplete_query',
+    'config form' => 'gk_search_autocomplete_config_form',
+  );
+
+  return $types;
+}
+
+
+function gk_search_autocomplete_searches(SearchApiIndex $index) {
+
+$ret = array();
+  // If your module only provides one search, it's simple:
+  $ret['gk_search']['name'] = t('MODULE search');
+  // Otherwise, loop over all defined searches:
+  foreach (… as $search) {
+    // Remember to use a proper prefix to avoid conflicts.
+    $id = 'gk_search_' . $search->id;
+    $ret[$id]['name'] = $search->label;
+    // If the searches have additional options/information:
+    $ret[$id]['options']['custom'] = $search->options;
+  }
+  return $ret;
+  
+  
+  
+
+  }
+  
+ 
+function gk_search_create_autocomplete_query(SearchApiAutocompleteSearch $search, $complete, $incomplete) {
+  $query = search_api_query($search->index_id);
+  if ($complete) {
+    $query->keys($complete);
+  }
+  if (!empty($search->options['custom']['extra'])) {
+    list($f, $v) = explode('=', $search->options['custom']['extra'], 2);
+    $query->condition($f, $v);
+  }
+  if (!empty($search->options['custom']['user_filters'])) {
+    foreach (explode("\n", $search->options['custom']['user_filters']) as $line) {
+      list($f, $v) = explode('=', $line, 2);
+      $query->condition($f, $v);
+    }
+  }
+  return $query;
+}
+
+
+
+
+function gk_search_autocomplete_config_form(array $form, array &$form_state, SearchApiAutocompleteSearch $search) {
+  $form['user_filters'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Custom filters'),
+    '#description' => t('Enter additional filters set on the autocompletion search. ' .
+        'Write one filter on each line, the field and its value separated by an equals sign (=).'),
+    '#default_value' => empty($search->options['custom']['user_filters']) ? '' : $search->options['custom']['user_filters'],
+  );
+
+  return $form;
+}
+
+
+
+
+
+
