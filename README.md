@@ -14,8 +14,6 @@ After:
 
 
 
-
-
 ##Usage :
  - install module.
  - enable the module and setup up as shown in enable_search.png
